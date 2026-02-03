@@ -1,8 +1,26 @@
+
 import { MatchSummary, Team, User, PlayerStat, DashboardStats, Player, PlayerRole, UserProfile } from "../types";
 
-// production: use env var, development: localhost
-// Safely access import.meta.env (it might be undefined in non-Vite environments)
-const API_URL = ((import.meta as any).env && (import.meta as any).env.VITE_API_URL) || "http://localhost:5000/api";
+// Helper to normalize the API URL
+const getApiUrl = () => {
+    // Safely access import.meta.env
+    const env = (import.meta as any).env;
+    let url = (env && env.VITE_API_URL) || "http://localhost:5000/api";
+    
+    // Normalize: Remove trailing slash if present
+    if (url.endsWith('/')) {
+        url = url.slice(0, -1);
+    }
+    
+    // Auto-fix: Append /api if missing (Common configuration error)
+    if (!url.endsWith('/api')) {
+        url = `${url}/api`;
+    }
+    
+    return url;
+};
+
+const API_URL = getApiUrl();
 
 const getHeaders = () => {
   const token = localStorage.getItem("token");
