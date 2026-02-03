@@ -178,7 +178,7 @@ export const UploadMatch: React.FC = () => {
                   : 'bg-gradient-to-r from-primary-600 to-primary-500 hover:scale-[1.01] text-white'
               }`}
             >
-              {loading ? <><Loader2 className="animate-spin" /> Analyzing with Backend AI...</> : <>Process Match Results <ChevronRight size={20}/></>}
+              {loading ? <><Loader2 className="animate-spin" /> Analyzing (this may take up to 60s)...</> : <>Process Match Results <ChevronRight size={20}/></>}
             </button>
         </div>
       )}
